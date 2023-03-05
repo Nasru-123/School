@@ -51,13 +51,15 @@ function LoginPage() {
     <div className="login-page">
       <form onSubmit={handlingSubmit}>
         <FontAwesomeIcon className="school_icon" icon={faGraduationCap} />
-        <h2>Login</h2>
+        <h2 className="login_text">Login</h2>
         {authentated && isAlertVisible ? (
           <h5 className="Popup">Incorrect Password</h5>
         ) : null}
 
         <div>
-          <label htmlFor="username">Username:</label>
+          <label className="user-password-text" htmlFor="username">
+            Username:
+          </label>
           <input
             className={isTrue && isAlertVisible ? "redInput" : "input"}
             type="text"
@@ -68,7 +70,7 @@ function LoginPage() {
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label className="user-password-text" htmlFor="password">Password:</label>
           <input
             className={isTrue && isAlertVisible ? "redInput" : "input"}
             type="password"

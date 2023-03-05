@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
+
+
 .login-page {
     display: flex;
     flex-direction: column;
@@ -72,4 +76,12 @@
   }
   .school_icon{
     font-size: 40px;
+  }
+
+  .login_text{
+    font-family: 'Josefin Sans', cursive;
+  }
+
+  .user-password-text {
+    font-family: 'Josefin Sans', cursive;
   }

@@ -16,6 +16,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-shadow: -1px 0px 10px 0px;
   }
   
   label {
@@ -29,7 +30,7 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     width: 100%;
-
+    margin-top: 10px;
 
   }
   
@@ -40,6 +41,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 45%;
   }
 .redInput{
   padding: 10px;
@@ -47,6 +49,7 @@
   border-radius: 5px;
   border: 1px solid red;
   width: 100%;
+  margin-top: 10px;
 }
   .Popup {
   color: red;
@@ -59,10 +62,14 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
   .redPopup{
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid red;
     width: 100%;
+  }
+  .school_icon{
+    font-size: 40px;
   }

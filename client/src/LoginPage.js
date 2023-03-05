@@ -4,39 +4,14 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-// const [username, createUser] = useState("");
-// const [password, setPassword] = useState("");
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   const post = { username: username, password: password };
-//   console.log("post", post);
-//   try {
-//     const res = await axios.post(
-//       "http://192.168.1.12:2000/api/v2/auth/login",
-//       post
-//     );
-//     console.log(res.data);
-//   } catch (e) {
-//     console.log("e");
-//   }
-// };
-
 function LoginPage() {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [authentated, setAuthenticated] = useState(null);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [isTrue, setIsTrue] = useState(false);
 
-  // const [authentated, setAuthenticated] = useState("");
-
-  console.log("username", username);
-  console.log("password", password);
-
-  // const [username, createUser] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [authenticated, setauthenticated] = useState(
-  //   localStorage.getItem(localStorage.getItem("authenticated") || false)
-  // );
   const handlingSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,20 +21,28 @@ function LoginPage() {
       password: password,
     };
 
+    setTimeout(() => {
+      setIsAlertVisible(false);
+    }, 1000);
+
+    const loggedInUser = localStorage.getItem("authenticated");
+    setAuthenticated(loggedInUser);
     try {
       const res = await axios.post(
-        "http://192.168.1.17:2000/api/v2/auth/login",
+        "http://192.168.1.15:2000/api/v2/auth/login",
         data
       );
       console.log("res", res);
       if (res.status == 200) {
-        // setAuthenticated(true);
         console.log("here faraz");
-        localStorage.setItem("authentated", true);
+        localStorage.setItem("authenticated", false);
         navigate("/dashboard");
       }
     } catch (error) {
       navigate("/login");
+      localStorage.setItem("authenticated", true);
+      setIsAlertVisible(true);
+      setIsTrue(true);
     }
 
     console.log("data", data);
@@ -69,24 +52,28 @@ function LoginPage() {
     <div className="login-page">
       <form onSubmit={handlingSubmit}>
         <h2>Login</h2>
+        {authentated && isAlertVisible ? (
+          <h5 className="Popup">Incorrect Password</h5>
+        ) : null}
+
         <div>
           <label htmlFor="username">Username:</label>
           <input
+            className={isTrue && isAlertVisible ? "redInput" : "input"}
             type="text"
             id="username"
             value={username}
             onChange={(event) => setUserName(event.target.value)}
-            // onChange={(event) => createUser(event.target.value)}
           />
         </div>
         <div>
           <label htmlFor="password">Password:</label>
           <input
+            className={isTrue && isAlertVisible ? "redInput" : "input"}
             type="password"
             id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            // onChange={(event) => setPassword(event.target.value)}
           />
         </div>
         <button type="submit">Login</button>

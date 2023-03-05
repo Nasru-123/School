@@ -23,12 +23,14 @@
     margin-bottom: 10px;
   }
   
-  input {
+  .input {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid #ccc;
     width: 100%;
+
+
   }
   
   button {
@@ -38,4 +40,29 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+  }
+.redInput{
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid red;
+  width: 100%;
+}
+  .Popup {
+  color: red;
+  }
+  .whitepopup{
+    padding: 10px 20px;
+    background-color: #0077ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .redPopup{
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid red;
+    width: 100%;
   }

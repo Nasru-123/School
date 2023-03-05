@@ -5,7 +5,9 @@
     justify-content: center;
     height: 100vh;
   }
-  
+  .login-page form{
+    padding:50px;
+  }
   form {
     display: flex;
     flex-direction: column;

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -15,7 +16,6 @@ function LoginPage() {
   const handlingSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("form submited");
     const data = {
       username: username,
       password: password,
@@ -32,9 +32,8 @@ function LoginPage() {
         "http://192.168.1.15:2000/api/v2/auth/login",
         data
       );
-      console.log("res", res);
+
       if (res.status == 200) {
-        console.log("here faraz");
         localStorage.setItem("authenticated", false);
         navigate("/dashboard");
       }
@@ -43,14 +42,15 @@ function LoginPage() {
       localStorage.setItem("authenticated", true);
       setIsAlertVisible(true);
       setIsTrue(true);
+      setUserName("");
+      setPassword("");
     }
-
-    console.log("data", data);
   };
 
   return (
     <div className="login-page">
       <form onSubmit={handlingSubmit}>
+        <FontAwesomeIcon className="school_icon" icon={faGraduationCap} />
         <h2>Login</h2>
         {authentated && isAlertVisible ? (
           <h5 className="Popup">Incorrect Password</h5>
@@ -64,6 +64,7 @@ function LoginPage() {
             id="username"
             value={username}
             onChange={(event) => setUserName(event.target.value)}
+            required
           />
         </div>
         <div>
@@ -74,6 +75,7 @@ function LoginPage() {
             id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            required
           />
         </div>
         <button type="submit">Login</button>

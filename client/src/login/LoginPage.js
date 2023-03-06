@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import axios from "axios";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 
@@ -70,8 +70,10 @@ function LoginPage() {
           />
         </div>
         <div>
-          <label className="user-password-text" htmlFor="password">Password:</label>
-          <input 
+          <label className="user-password-text" htmlFor="password">
+            Password:
+          </label>
+          <input
             className={isTrue && isAlertVisible ? "redInput" : "input"}
             type="password"
             id="password"
@@ -80,10 +82,9 @@ function LoginPage() {
             required
           />
         </div>
-       
+
         <button type="submit">Login</button>
         <Link to="/forgotpassword">Forget Password</Link>
-      
       </form>
     </div>
   );

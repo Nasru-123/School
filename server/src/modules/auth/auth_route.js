@@ -1,7 +1,8 @@
 import express from 'express';
 import middlewares from '../../middleware/auth_middleware';
 import user from './auth_controller'
-const router = express.Router();
+const router = express.Router();;
+
 
 
 // login api
@@ -25,7 +26,10 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
-
+router.post('/forget-password',(req,res)=>{
+  let email = req.body.email;
+  user.ForgetPasswordService(email);
+})
 
 
 export default router;

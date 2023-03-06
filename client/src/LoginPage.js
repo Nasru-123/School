@@ -70,7 +70,9 @@ function LoginPage() {
           />
         </div>
         <div>
-          <label className="user-password-text" htmlFor="password">Password:</label>
+          <label className="user-password-text" htmlFor="password">
+            Password:
+          </label>
           <input
             className={isTrue && isAlertVisible ? "redInput" : "input"}
             type="password"

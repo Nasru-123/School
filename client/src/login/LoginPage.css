@@ -46,6 +46,7 @@
     border-radius: 5px;
     cursor: pointer;
     width: 45%;
+    margin-bottom: 13px;
   }
 .redInput{
   padding: 10px;
@@ -84,4 +85,10 @@
 
   .user-password-text {
     font-family: 'Josefin Sans', cursive;
+  }
+  .login_forget_link{
+    display: inline-block;
+  }
+  .login_forget_btn{
+    display: inline-block;
   }

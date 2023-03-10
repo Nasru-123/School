@@ -17,7 +17,7 @@ function LoginPage() {
     e.preventDefault();
 
     const data = {
-      email:email,
+      username:email,
       password: password,
     };
 

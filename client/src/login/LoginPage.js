@@ -7,7 +7,7 @@ import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authentated, setAuthenticated] = useState(null);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
@@ -17,7 +17,7 @@ function LoginPage() {
     e.preventDefault();
 
     const data = {
-      username: username,
+      email:email,
       password: password,
     };
 
@@ -29,7 +29,7 @@ function LoginPage() {
     setAuthenticated(loggedInUser);
     try {
       const res = await axios.post(
-        "http://192.168.1.15:2000/api/v2/auth/login",
+        "http://localhost:2000/api/v2/auth/login",
         data
       );
 
@@ -42,14 +42,14 @@ function LoginPage() {
       localStorage.setItem("authenticated", true);
       setIsAlertVisible(true);
       setIsTrue(true);
-      setUserName("");
+      setEmail("");
       setPassword("");
     }
   };
 
   return (
     <div className="login-page">
-      <form onSubmit={handlingSubmit}>
+      <form className="login_form" onSubmit={handlingSubmit}>
         <FontAwesomeIcon className="school_icon" icon={faGraduationCap} />
         <h2 className="login_text">Login</h2>
         {authentated && isAlertVisible ? (
@@ -64,8 +64,8 @@ function LoginPage() {
             className={isTrue && isAlertVisible ? "redInput" : "input"}
             type="text"
             id="username"
-            value={username}
-            onChange={(event) => setUserName(event.target.value)}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             required
           />
         </div>

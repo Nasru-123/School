@@ -31,5 +31,12 @@ router.post('/forget-password',(req,res)=>{
   user.ForgetPasswordService(email);
 })
 
+router.post('/reset-password',async(req,res)=>{
+const password=req.body.resetPassword;
+const email=req.body.email;
+  const users = await user.ResetPassword(password,email);
+  return users;
+})
+
 
 export default router;

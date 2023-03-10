@@ -10,11 +10,11 @@ const login = async (request) => {
   try {
 
     const userObject = {
-      email: request.email,
+      username: request.username,
       password: request.password
     }
     const checkUserExist = await User.query()
-      .where({ email: userObject.email,password:userObject.password })
+      .where({ username: userObject.username,password:userObject.password })
     if (checkUserExist.length === 0) {
       return {
 

@@ -7,7 +7,7 @@ import Knex from 'knex'
 let knex = Knex({
   client: 'pg',
   connection: {
-    database: 'school_DB',
+    database: 'SCHOOL_DB',
     user: 'postgres',
     password: 'root',
     port: 5432,

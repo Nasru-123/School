@@ -6,8 +6,8 @@ import axios from "axios";
 const ForgetPassword = () => {
     const [showReset,setResetPassword] = useState(true);
     const [email, setEmail] = useState("");
+    
     const handlingSubmit=async(e)=>{
-
         setResetPassword(false);
         const data = {
             email:email
@@ -15,22 +15,22 @@ const ForgetPassword = () => {
         try {
             console.log('runnnn',data)
             const res = await axios.post(
-              "http://192.168.1.15:2000/api/v2/auth/forget-password",
+              "http://localhost:2000/api/v2/auth/forget-password",
               data
             );
       console.log('res',res)
-            // if (res.status == 200) {
-            //   localStorage.setItem("authenticated", false);
-            //   navigate("/dashboard");
-            // }
+            if (res.status == 200) {
+              localStorage.setItem("authenticated", false);
+              navigate("/dashboard");
+            }
           } catch (error) {
             console.log(error)
-            // navigate("/login");
-            // localStorage.setItem("authenticated", true);
-            // setIsAlertVisible(true);
-            // setIsTrue(true);
-            // setUserName("");
-            // setPassword("");
+            navigate("/login");
+            localStorage.setItem("authenticated", true);
+            setIsAlertVisible(true);
+            setIsTrue(true);
+            setUserName("");
+            setPassword("");
           }
         e.preventDefault()
     }

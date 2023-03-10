@@ -10,11 +10,11 @@ const login = async (request) => {
   try {
 
     const userObject = {
-      username: request.username,
+      email: request.email,
       password: request.password
     }
     const checkUserExist = await User.query()
-      .where({ username: userObject.username,password:userObject.password })
+      .where({ email: userObject.email,password:userObject.password })
     if (checkUserExist.length === 0) {
       return {
 
@@ -33,26 +33,44 @@ const login = async (request) => {
 
 const ForgetPasswordService = async(email) =>{
 try {
-  let testAccount = await nodemailer.createTestAccount();
+
   const transporter = nodemailer.createTransport({
     service: 'gmail',
-auth: {
-  user: testAccount.user,
-  pass: testAccount.pass,
-  },
+    auth: {
+        user: 'nukhan55@gmail.com',
+        pass: 'lqrbzmlnukrztucv'
+    }
  
     });
 
     const mailData = {
-      from: 'faizanqubaSSS@gmail.com',  // sender address
+      from: 'faizanquba1@gmail.gmail.com',  // sender address
         to: email,   // list of receivers
         subject: 'Reset Password',
-        html: '<p>You requested for reset password, kindly use this <a href="http://localhost:2000/reset-password?token=' + email + '">link</a> to reset your password</p>'
+        html: '<p>You requested for reset password, kindly use this <a href="http://localhost:3000/api/v2/auth/reset-password?token=' + email + '">link</a> to reset your password</p>'
                
       };
-      console.log('email',email)
+
    const data=  await transporter.sendMail(mailData);
-   console.log('data',data)
+   if(data){
+    return data;
+   }
+} catch (error) {
+  console.log(error)
+}
+}
+
+const ResetPassword = async(password,email) => {
+try {
+        const userUpdated = await User.query()
+        .patch({ password: `${password}` })
+        .where('email', `${email}`);
+        console.log('user',userUpdated)
+        if(userUpdated == 1){
+          return userUpdated
+        }else{
+          return null
+        }
 } catch (error) {
   console.log(error)
 }
@@ -60,5 +78,6 @@ auth: {
 
 export default {
   login,
-  ForgetPasswordService
+  ForgetPasswordService,
+  ResetPassword
 }

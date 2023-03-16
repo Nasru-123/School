@@ -1,0 +1,133 @@
+
+.class_dashboard_container{
+    display: flex;
+    /* justify-content: flex-start; */
+    width: 25%;
+    justify-content: space-around;
+    height: 29px;
+    align-items: self-end;
+  
+   
+}
+.date_icon_grid{
+    display: flex;
+    align-items: center;
+    width: 31%;
+    justify-content: space-between;
+}
+.date_class_details{
+
+    max-width: 1245px;
+    margin: auto;
+    background-color: #f2f1f1;
+}
+.date_class_detail_heading{
+    font-family: fangsong;
+    font-size: 19px;
+}
+.class_details_button_head{
+    display: flex;
+    align-items: center;
+}
+.details_button{
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #050505;
+    margin: 1px 16px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+.arrow_icon{
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  thead {
+    background-color: #222222;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #dddddd;
+  }
+  
+  th {
+    white-space: nowrap;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+  
+  tr:hover {
+    background-color: #dddddd;
+  }
+  
+  @media screen and (max-width: 600px) {
+    th, td {
+      font-size: 12px;
+    }
+  }
+
+  .class_details_students{
+    display: flex;
+    justify-content: space-around;
+  }
+  .class_details_students_table{
+  width: 62%;
+  }
+
+  .class_details_students_graph{
+    width: 34%;
+  }
+
+  .class_details_students_data{
+    width: 56%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .class_details_students_head{
+
+    padding: 1px 13px
+  }
+  
+  .class_details_students_heading{
+    font-weight: 900;
+  }
+
+  .class_details_students_head_heading:hover{
+    text-decoration: underline;
+    text-decoration-color: rgb(0, 0, 0);
+    font-weight: 900;
+    cursor: pointer;
+  }
+  .class_detils_students_attended_head{
+    display: flex;
+    align-items: center;
+    width: 25%;
+ 
+  }
+
+  .class_details_students_a{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .class_display_student{
+    width: 40%;
+  }

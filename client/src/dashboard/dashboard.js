@@ -18,6 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import MainDashboardPage from '../layouts/main.dashboard';
 import AdmissionDashboardPage from '../layouts/admission/admission.dashboard'
+import ClassAdmissionForm from "../layouts/classes/classes.dashboard";
 
 const drawerWidth = 240;
 
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+  
   },
 }));
 
@@ -98,22 +99,7 @@ function ResponsiveDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Well Come To School Admission System
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -147,7 +133,8 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
       {/* <MainDashboardPage /> */}
-      <AdmissionDashboardPage />
+      {/* <AdmissionDashboardPage /> */}
+      <ClassAdmissionForm />
       
       </main>
     </div>

@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import './classes.dashboard.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faCalendarDay, faTimesCircle,faArrowRight,faArrowLeft,faSquare } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDay, faTimesCircle,faArrowRight,faArrowLeft,faSquare,faCircle } from "@fortawesome/free-solid-svg-icons";
 import RoundChart from './round-charts';
+import LineChart from './curve-charts';
 
 
 
 const ClassAdmissionForm = () => {
+  const data = [
+    {  fail: 1000, pass: 500,not_attempted:2000 },
+    {  fail: 15000, pass: 6000,not_attempted:2000 },
+
+  ];
  
     const months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
 
@@ -220,15 +226,73 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
   <RoundChart data={{ A: 10, B: 20  }} />
 
 </div>
+
+
     
     <div>
-
+    
     </div>
+
+   
 </div>
 
 
 
   </div>
+
+<br />
+<br />
+  {/* here curve graph comes */}
+<div className='classes_footer_graph_main'>
+<div className='classes_footer_graph_one'>
+  <h1 className='classes_footer_graph_curve_heading'>Exams</h1>
+  <div className='class_details_students_data_curve'>
+            <p className='class_details_students_head__curve_heading'>Today</p>
+            <p className='class_details_students_head__curve_heading'>Monthly</p>
+            <p className='class_details_students_head__curve_heading' >Weekly</p>
+            <p className='class_details_students_head__curve_heading'>Yearly</p>
+        </div>
+        <LineChart data={data}  />
+</div>
+</div>
+
+<div className='classes_footer_exams_head'>
+  <div className='classes_footer_exams_head_one'>
+   <h3>English</h3>
+   <div className='classes_footer_exams_head_one_flex'>
+  <div className='classes_footer_exams_head_one_flex_main'>
+  <FontAwesomeIcon color='green' className="date_icon" icon={faCircle} />
+   <p>92% pass</p>
+  </div>
+  <div className='classes_footer_exams_head_one_flex_main'>
+  <FontAwesomeIcon  color='red' className="date_icon" icon={faCircle} />
+   <p>7% fail</p>
+  </div>
+  <div className='classes_footer_exams_head_one_flex_main'>
+  <FontAwesomeIcon color='blue' className="date_icon" icon={faCircle} />
+   <p>2% not-attended</p>
+  </div>
+   </div>
+  </div>
+
+  <div className='classes_footer_exams_head_one'>
+   <h3>Maths</h3>
+   <div className='classes_footer_exams_head_one_flex'>
+  <div className='classes_footer_exams_head_one_flex_main'>
+  <FontAwesomeIcon color='green' className="date_icon" icon={faCircle} />
+   <p>92% pass</p>
+  </div>
+  <div className='classes_footer_exams_head_one_flex_main'>
+  <FontAwesomeIcon  color='red' className="date_icon" icon={faCircle} />
+   <p>7% fail</p>
+  </div>
+  <div className='classes_footer_exams_head_one_flex_main'>
+  <FontAwesomeIcon color='blue' className="date_icon" icon={faCircle} />
+   <p>2% not-attended</p>
+  </div>
+   </div>
+  </div>
+</div>
 </div>
   
   

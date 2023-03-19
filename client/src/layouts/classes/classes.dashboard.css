@@ -122,6 +122,18 @@ table {
     width: 25%;
  
   }
+  .class_details_students_data_curve{
+    width: 80%;
+    justify-content: space-between;
+    display: flex;
+  }
+
+  .class_details_students_head__curve_heading:hover{
+    text-decoration: underline;
+    text-decoration-color: rgb(0, 0, 0);
+    font-weight: 900;
+    cursor: pointer;
+  }
 
   .class_details_students_a{
     display: flex;
@@ -130,4 +142,25 @@ table {
 
   .class_display_student{
     width: 40%;
+  }
+
+  .classes_footer_graph_main{
+    max-width: 300Px;
+    margin: 12px;
+    padding: 12px 16px;
+  }
+
+  .classes_footer_graph_curve_heading{
+    font-size: 18px;
+    font-family: math;
+    font-weight: 900;
+  }
+  .classes_footer_exams_head_one_flex_main{
+    display: flex;
+    align-items: center;
+  }
+  .classes_footer_exams_head{
+    justify-content: space-around;
+    display: flex;
+    width: 83%;
   }

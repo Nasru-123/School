@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './classes.dashboard.css';
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faCalendarDay, faTimesCircle,faArrowRight,faArrowLeft,faSquare,faCircle } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +10,22 @@ import LineChart from './curve-charts';
 
 
 const ClassAdmissionForm = () => {
+  const [students, setStudents] = useState([]);
+console.log('ssss',students)
+// Click Button
+const handleButtonClick=async(e) =>{
+  const name=e.target.textContent;
+  const res = await axios.get(
+    `http://localhost:2000/api/v2/admission/getgrade?name=${name}`
+  );
+  console.log('000',res.status)
+if(res.status ===200){
+  setStudents(res.data.students)
+}
+  e.preventDefault()
+}
+
+
   const data = [
     {  fail: 1000, pass: 500,not_attempted:2000 },
     {  fail: 15000, pass: 6000,not_attempted:2000 },
@@ -70,15 +87,15 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
 <h2 className='date_class_detail_heading'>Class Details</h2>
 <div className='class_details_button_head'>
 <FontAwesomeIcon className="arrow_icon" icon={faArrowLeft} />
-    <button className='details_button'>KG</button>
-    <button className='details_button'>Grade 1</button>
-    <button className='details_button'>Grade 2</button>
-    <button className='details_button'>Grade 3</button>
-    <button className='details_button'>Grade 4</button>
-    <button className='details_button'>Grade 5</button>
-    <button className='details_button'>Grade 6</button>
-    <button className='details_button'>Grade 7</button>
-    <button className='details_button'>Grade 8</button>
+    <button onClick={handleButtonClick}  className='details_button'>Grade 1</button>
+    <button onClick={handleButtonClick}  className='details_button'>Grade 2</button>
+    <button onClick={handleButtonClick}  className='details_button'>Grade 3</button>
+    <button onClick={handleButtonClick}  className='details_button'>Grade 4</button>
+    <button onClick={handleButtonClick}  className='details_button'>Grade 5</button>
+    <button onClick={handleButtonClick}  className='details_button'>Grade 6</button>
+    <button onClick={handleButtonClick}  className='details_button'>Grade 7</button>
+    <button onClick={handleButtonClick}  className='details_button'>Grade 8</button>
+    <button onClick={handleButtonClick} className='details_button'>Grade 9</button>
     <FontAwesomeIcon className="arrow_icon" icon={faArrowRight} />
 </div>
 <div className='class_details_students'>
@@ -95,73 +112,22 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>001</td>
-      <td>John Doe</td>
-      <td>john.doe@example.com</td>
-      <td>(555) 555-1234</td>
-    </tr>
-    <tr>
-      <td>002</td>
-      <td>Jane Smith</td>
-      <td>jane.smith@example.com</td>
-      <td>(555) 555-5678</td>
-    </tr>
+   
+  {students.length>0 ? students.map(item => (
+          <tr>
+            <td>{item.key}</td>
+            <td>{item.firstName}</td>
+            <td>{item.grade}</td>
+            <td>{item.address}</td>
+          </tr>
+        ))
+      :
 
-    <tr>
-      <td>002</td>
-      <td>Jane Smith</td>
-      <td>jane.smith@example.com</td>
-      <td>(555) 555-5678</td>
-    </tr>
-
-    <tr>
-      <td>002</td>
-      <td>Jane Smith</td>
-      <td>jane.smith@example.com</td>
-      <td>(555) 555-5678</td>
-    </tr>
-
-    <tr>
-      <td>002</td>
-      <td>Jane Smith</td>
-      <td>jane.smith@example.com</td>
-      <td>(555) 555-5678</td>
-    </tr>
-
-    <tr>
-      <td>002</td>
-      <td>Jane Smith</td>
-      <td>jane.smith@example.com</td>
-      <td>(555) 555-5678</td>
-    </tr>
-
-    <tr>
-      <td>002</td>
-      <td>Jane Smith</td>
-      <td>jane.smith@example.com</td>
-      <td>(555) 555-5678</td>
-    </tr>
-
-    <tr>
-      <td>002</td>
-      <td>Jane Smith</td>
-      <td>jane.smith@example.com</td>
-      <td>(555) 555-5678</td>
-    </tr>
-
-    <tr>
-      <td>002</td>
-      <td>Jane Smith</td>
-      <td>jane.smith@example.com</td>
-      <td>(555) 555-5678</td>
-    </tr>
-    <tr>
-      <td>002</td>
-      <td>Jane Smith</td>
-      <td>jane.smith@example.com</td>
-      <td>(555) 555-5678</td>
-    </tr>
+     <div>
+       <h4 className='hidden_student_not_found'>No Record Found !!</h4>
+     </div>
+ 
+      }
   </tbody>
 </table>
 </div>

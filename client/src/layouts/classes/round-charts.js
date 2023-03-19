@@ -38,7 +38,7 @@ const RoundChart = ({ data }) => {
     });
   }, [data]);
 
-  return <canvas width={'100px'} height={'100px'} ref={chartRef} />;
+  return <canvas style={{width:'50px'}}  height={'100px'} ref={chartRef} />;
 };
 
 export default RoundChart;

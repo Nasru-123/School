@@ -9,6 +9,11 @@
   
    
 }
+.hidden_student_not_found{
+  top: 354px;
+  right: 811px;
+  position: absolute;
+}
 .date_icon_grid{
     display: flex;
     align-items: center;

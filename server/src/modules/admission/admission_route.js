@@ -26,6 +26,22 @@ router.post('/create', async (req, res, next) => {
   }
 })
 
-
+router.get('/getgrade', async (req, res, next) => {
+  let request = req.query;
+  try {
+    const students = await admission.getGradeByName(request.name);
+    if(!students){
+      return res.status(404).json({
+        message: "students not founds"
+      })
+    }
+    return res.status(200).json({
+      message: "sucessfully fetched",
+      students: students
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 export default router;

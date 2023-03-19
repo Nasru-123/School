@@ -27,8 +27,23 @@ const student = await Admission.query().insert({
 }
 
 
+const getGradeByName = async (name) => {
+  try {
+
+const regex = /Grade (\d+)/;
+const match = name.match(regex);
+const schoolGrade=match[1];
+ const classDetails=await Admission.query().where('grade', schoolGrade);
+ return classDetails;
+
+
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 export default {
-    create
+    create,
+    getGradeByName
 }

@@ -19,6 +19,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import MainDashboardPage from '../layouts/main.dashboard';
 import AdmissionDashboardPage from '../layouts/admission/admission.dashboard'
 import ClassAdmissionForm from "../layouts/classes/classes.dashboard";
+import AttandencePage from "../layouts/attendence/attendence";
 
 const drawerWidth = 240;
 
@@ -70,7 +71,7 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {["Admission", "Class", "Faculity", "Contatct"].map((text, index) => (
+        {["Admission", "Class", "Attendence", "Contatct"].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -134,6 +135,7 @@ function ResponsiveDrawer(props) {
       <main className={classes.content}>
       {/* <MainDashboardPage /> */}
       {/* <AdmissionDashboardPage /> */}
+      {/* <AttandencePage /> */}
       <ClassAdmissionForm />
       
       </main>

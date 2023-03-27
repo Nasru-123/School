@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './classes.dashboard.css';
 import axios from "axios";
+import Spinner from 'react-bootstrap/Spinner';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { faCalendarDay, faTimesCircle,faArrowRight,faArrowLeft,faSquare,faCircle } from "@fortawesome/free-solid-svg-icons";
 import RoundChart from './round-charts';
@@ -11,18 +13,45 @@ import LineChart from './curve-charts';
 
 const ClassAdmissionForm = () => {
   const [students, setStudents] = useState([]);
-console.log('ssss',students)
+     const [csvFile, SetCsvFile] = useState();
+     const [isLoading,setisLoading] = useState(false);
+     const fileReader = new FileReader();
+     
+
+
+    const SubmitCSVFile=(e)=>{
+      e.preventDefault();
+      let formData = new FormData();
+      formData.append('name', "FILENAME");
+      formData.append('file', csvFile); 
+      console.log('ssss',csvFile)
+      const url = 'http://localhost:2000/api/v2/admission/getcsvfile';
+      axios({
+          method: 'POST',
+          url: url,
+          headers: {
+              ContentType: 'multipart/form-data'
+          },
+          body: formData
+      })
+  
+    }
+
+
 // Click Button
 const handleButtonClick=async(e) =>{
+  setisLoading(true)
   const name=e.target.textContent;
   const res = await axios.get(
     `http://localhost:2000/api/v2/admission/getgrade?name=${name}`
   );
   console.log('000',res.status)
 if(res.status ===200){
-  setStudents(res.data.students)
+  setStudents(res.data.students);
+  setisLoading(false)
 }
   e.preventDefault()
+  setisLoading(false)
 }
 
 
@@ -63,6 +92,8 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
 
   return (
   <>
+
+
  <div className='class_dashboard_container'>
 
    {
@@ -113,19 +144,26 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
   </thead>
   <tbody>
    
-  {students.length>0 ? students.map(item => (
+  
+  {
+ 
+  isLoading ?
+   <Spinner className='class_spinner'  animation="border" variant="primary" /> :
+  students.length>0 ? students.map(item => (
           <tr>
-            <td>{item.key}</td>
+            <td>{item.admissionId
+}</td>
             <td>{item.firstName}</td>
             <td>{item.grade}</td>
             <td>{item.address}</td>
           </tr>
         ))
       :
+      <div>
+      <h4 className='hidden_student_not_found'>No Record Found !!</h4>
+    </div>
 
-     <div>
-       <h4 className='hidden_student_not_found'>No Record Found !!</h4>
-     </div>
+   
  
       }
   </tbody>
@@ -170,6 +208,7 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
             <p className='class_details_students_head_heading'>Monthly</p>
             <p className='class_details_students_head_heading' >Weekly</p>
             <p className='class_details_students_head_heading'>Yearly</p>
+           
         </div>
     </div>
     <div className='class_details_students_a'>
@@ -190,6 +229,7 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
   {/* Graph comes here */}
   {/* <canvas ref={chartRef} /> */}
   <RoundChart data={{ A: 10, B: 20  }} />
+
 
 </div>
 
@@ -259,6 +299,13 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
    </div>
   </div>
 </div>
+ {/* <div className="flex flex-col gap-6 justify-center items-center h-screen">
+        <h1> Page Title</h1>
+        <form onSubmit={SubmitCSVFile}>
+          <input type="file" accept=".csv" onChange={(event) =>  SetCsvFile(event.target.files[0])} />
+          <button type="submit" className="bg-blue-500 px-4 py-2 rounded-md font-semibold">fetch</button>
+        </form>
+      </div> */}
 </div>
   
   

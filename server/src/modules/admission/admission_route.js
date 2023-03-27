@@ -44,4 +44,9 @@ router.get('/getgrade', async (req, res, next) => {
   }
 })
 
+
+router.post('/getcsvfile',async(req,res,next) => {
+  console.log('resssss',req)
+})
+
 export default router;

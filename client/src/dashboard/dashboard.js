@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
+import ClassDetails from '../layouts/classes/classes.dashboard';
 import IconButton from "@material-ui/core/IconButton";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import List from "@material-ui/core/List";
@@ -20,6 +21,8 @@ import MainDashboardPage from '../layouts/main.dashboard';
 import AdmissionDashboardPage from '../layouts/admission/admission.dashboard'
 import ClassAdmissionForm from "../layouts/classes/classes.dashboard";
 import AttandencePage from "../layouts/attendence/attendence";
+import { Switch, Route, Link, Routes, Outlet } from "react-router-dom";
+import AttendencePage from "../layouts/attendence/attendence";
 
 const drawerWidth = 240;
 
@@ -71,14 +74,34 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {["Admission", "Class", "Attendence", "Contatct"].map((text, index) => (
-          <ListItem button key={text}>
+       <Link to="/dashboard">
+       </Link>
+         <Link to="/dashboard/admission">
+          <ListItem button key="Admission">
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+             <InboxIcon /> 
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary="Admission" />
           </ListItem>
-        ))}
+          </Link>
+
+          <Link to="/dashboard/details">
+          <ListItem button key="Class Details">
+            <ListItemIcon>
+             <InboxIcon /> 
+            </ListItemIcon>
+            <ListItemText primary="Class Details" />
+          </ListItem>    
+          </Link>
+
+          <Link to="/dashboard/attendence">
+          <ListItem button key="Attendence">
+            <ListItemIcon>
+             <InboxIcon /> 
+            </ListItemIcon>
+            <ListItemText primary="Attendence" />
+          </ListItem>
+          </Link>
       </List>
       <Divider />
       <List>
@@ -91,6 +114,7 @@ function ResponsiveDrawer(props) {
           </ListItem>
         ))}
       </List>
+  
     </div>
   );
 
@@ -133,10 +157,12 @@ function ResponsiveDrawer(props) {
         </Hidden>
       </nav>
       <main className={classes.content}>
+        
+      <Outlet/>
       {/* <MainDashboardPage /> */}
       {/* <AdmissionDashboardPage /> */}
-      {/* <AttandencePage /> */}
-      <ClassAdmissionForm />
+      
+      {/* <ClassAdmissionForm /> */}
       
       </main>
     </div>

@@ -14,7 +14,7 @@ const AttendencePage = () => {
      const [csvFile, SetCsvFile] = useState();
      const fileReader = new FileReader();
      
-
+console.log(attendence)
 const SubmitAttendence = (e) =>{
   
     e.preventDefault()
@@ -111,7 +111,7 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
 {/* Class Details */}
 
 <div className='date_class_details'>
-<h2 className='date_class_detail_heading'>Class Details</h2>
+<h2 className='date_class_detail_heading'>Class Attendence</h2>
 <div className='class_details_button_head'>
 <FontAwesomeIcon className="arrow_icon" icon={faArrowLeft} />
     <button onClick={handleButtonClick}  className='details_button'>Grade 1</button>
@@ -149,11 +149,12 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
             <td>{item.firstName}</td>
             <td>{item.grade}</td>
             <td>{item.address}</td>
-            <input name='attendence[]' onChange={(event) => setAttendence({
+            <input name='attendence[]' onChange={(event) => setAttendence([...attendence,{
                 name:item.firstName,
                 grade:item.grade,
+                present:event.target.checked
               
-            })}  className='attendence_checkbox' type="checkbox"  />
+            }])}  className='attendence_checkbox' type="checkbox"  />
           </tr>
         ))
       :

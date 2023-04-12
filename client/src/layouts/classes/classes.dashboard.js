@@ -15,9 +15,13 @@ const ClassAdmissionForm = () => {
   const [students, setStudents] = useState([]);
      const [csvFile, SetCsvFile] = useState();
      const [isLoading,setisLoading] = useState(false);
+     const [presentStudent,setPresentStudents]=useState(0);
+     const [absentStudent,setAbsentSudents]=useState(0);
+     const [whichClass,setWhichClass]=useState(2)
      const fileReader = new FileReader();
      
-
+console.log('presentStudent',presentStudent)
+console.log('absentStudent',absentStudent)
 
     const SubmitCSVFile=(e)=>{
       e.preventDefault();
@@ -37,15 +41,28 @@ const ClassAdmissionForm = () => {
   
     }
 
+    const todayClicked =async (e) =>{
+     const textContent= e.target.textContent;
+     const attendenceResult = await axios.get(
+      `http://localhost:2000/api/v2/attendence/getattendence?name=${whichClass}&content=${textContent}`
+    );
+    setAbsentSudents(attendenceResult.data.data.studentAbsent[0].count)
+    setPresentStudents(attendenceResult.data.data.studentsPresent[0].count)
+    }
 
 // Click Button
 const handleButtonClick=async(e) =>{
   setisLoading(true)
   const name=e.target.textContent;
+  setWhichClass(name)
   const res = await axios.get(
     `http://localhost:2000/api/v2/admission/getgrade?name=${name}`
   );
-  console.log('000',res.status)
+  const attendenceResult = await axios.get(
+    `http://localhost:2000/api/v2/attendence/getattendence?name=${name}`
+  );
+  setPresentStudents(attendenceResult.data.data.studentAbsent[0].count)
+  setAbsentSudents(attendenceResult.data.data.studentsPresent[0].count)
 if(res.status ===200){
   setStudents(res.data.students);
   setisLoading(false)
@@ -175,10 +192,10 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
     <div className='class_details_students_head'>
         <p className='class_details_students_heading'>No.of students</p>
         <div className='class_details_students_data'>
-            <p className='class_details_students_head_heading'>Today</p>
-            <p className='class_details_students_head_heading'>Monthly</p>
-            <p className='class_details_students_head_heading' >Weekly</p>
-            <p className='class_details_students_head_heading'>Yearly</p>
+            <p onClick={todayClicked} className='class_details_students_head_heading'>Today</p>
+            <p onClick={todayClicked} className='class_details_students_head_heading'>Monthly</p>
+            <p onClick={todayClicked} className='class_details_students_head_heading' >Weekly</p>
+            <p onClick={todayClicked} className='class_details_students_head_heading'>Yearly</p>
         </div>
     </div>
 <div className='class_details_students_a'>
@@ -186,19 +203,21 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
   <div className='class_display_student'>
  <div className='class_detils_students_attended_head'>
  <FontAwesomeIcon color='red' className="arrow_icon" icon={faSquare} />
-    <p>Attended</p>
+    <p style={{marginLeft:'6px'}} >Attended</p>
  </div>
 
 <div className='class_detils_students_attended_head'>
 <FontAwesomeIcon color='blue' className="arrow_icon" icon={faSquare} />
-    <p> Not Attended</p>
+    <p style={{marginLeft:'6px'}}> Not Attended</p>
 </div>
   
     </div>  
 
     {/* Graph comes here */}
     {/* <canvas ref={chartRef} /> */}
-    <RoundChart data={{ A: 10, B: 20  }} />
+ <RoundChart data={{ A: presentStudent, B: absentStudent  }} />
+
+   
 
 </div>
 <div className='class_details_students_head'>

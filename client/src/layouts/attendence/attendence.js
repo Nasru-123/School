@@ -12,13 +12,30 @@ const AttendencePage = () => {
   const [students, setStudents] = useState([]);
   const [attendence,setAttendence] = useState([])
      const [csvFile, SetCsvFile] = useState();
+     const [isAttendence,setIsAttendence]=useState(false)
      const fileReader = new FileReader();
      
-console.log(attendence)
-const SubmitAttendence = (e) =>{
-  
+
+const SubmitAttendence = async(e) =>{
+  console.log('aaaa',attendence)
     e.preventDefault()
-    console.log('attendence',attendence)
+try {
+  const result = await axios
+    .post('http://localhost:2000/api/v2/attendence/create', {
+       headers: {
+         'Content-Type': 'application/json',
+       },
+      body: attendence,
+    })
+    if (result.status == 201) {
+      setIsAttendence(true)
+    }
+  
+    console.log('result',result)
+} catch (error) {
+  
+}
+    
 }
     const SubmitCSVFile=(e)=>{
       e.preventDefault();
@@ -126,8 +143,8 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
     <FontAwesomeIcon className="arrow_icon" icon={faArrowRight} />
 </div>
 <div className='class_details_students'>
-<form className='test' onSubmit={SubmitAttendence}>
-<div className='class_details_students_table'>
+<form className='attendece_form_wala' onSubmit={SubmitAttendence}>
+<div className='class_details_students_table_attendence'>
 <h2 style={{marginTop:'25px'
 }}>Students</h2>
   <table>
@@ -149,9 +166,9 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
             <td>{item.firstName}</td>
             <td>{item.grade}</td>
             <td>{item.address}</td>
-            <input name='attendence[]' onChange={(event) => setAttendence([...attendence,{
+            <input  onChange={(event) => setAttendence([...attendence,{
                 name:item.firstName,
-                grade:item.grade,
+                class:item.grade,
                 present:event.target.checked
               
             }])}  className='attendence_checkbox' type="checkbox"  />
@@ -168,7 +185,10 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
 </table>
 
 </div>
-<button className='attendence_button'>Take Attendence</button>
+{
+  isAttendence  ? <button className='attendence_button'>Attendence Taken</button> : <button className='attendence_button'>Take Attendence</button>
+}
+
 </form>
 
 
@@ -179,15 +199,6 @@ const currentTime = hours + ":" + minutes + ":" + seconds + " " + amOrPm;
 
 <br />
 <br />
-
-
- {/* <div className="flex flex-col gap-6 justify-center items-center h-screen">
-        <h1> Page Title</h1>
-        <form onSubmit={SubmitCSVFile}>
-          <input type="file" accept=".csv" onChange={(event) =>  SetCsvFile(event.target.files[0])} />
-          <button type="submit" className="bg-blue-500 px-4 py-2 rounded-md font-semibold">fetch</button>
-        </form>
-      </div> */}
 </div>
   
   
